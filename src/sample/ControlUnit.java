@@ -34,12 +34,12 @@ public class ControlUnit {
                     case 1: // sub
                         ALUOp0 = true;
                         break;
-                    case 2: // or
+                    case 2: // and
+                        ALUOp1 = true;
+                        break;
+                    case 3: // or
                         ALUOp1 = true;
                         ALUOp0 = true;
-                        break;
-                    case 3: // and
-                        ALUOp1 = true;
                         break;
                     case 4: // mul
                         ALUOp2 = true;

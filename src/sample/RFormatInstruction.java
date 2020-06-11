@@ -80,8 +80,8 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("add", "00000");   // +
         instructionMap.put("sub", "00100");   // +
 
-        instructionMap.put("and", "01100");   // +
-        instructionMap.put("or", "01000");    // +
+        instructionMap.put("and", "01000");   // +
+        instructionMap.put("or", "01100");    // +
 
         instructionMap.put("jr", "00110");    // +
 
