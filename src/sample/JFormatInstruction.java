@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class JFormatInstruction extends Instruction {
 
-    private static final Map<String, Short> instructionMap;
+    private static final Map<String, String> instructionMap;
     private Parser parser;
 
     public JFormatInstruction(String line, int i, Parser parser) throws Exception {
@@ -30,12 +30,17 @@ public class JFormatInstruction extends Instruction {
             throw new Exception("Check instruction format : " + line);
 
         // extract function name and offset
-        String functionName, offset;
+        String offset;
         functionName = instruction[0];
         offset = instruction[1];
 
+        String code = instructionMap.get(functionName);
+
+        opcode = Short.parseShort(code.substring(0, 3), 2);
+        is_imm = (code.charAt(3) == '1');
+        is_jump = (code.charAt(4) == '1');
+
         // specify instruction fields
-        this.opcode = instructionMap.get(functionName);
         this.immediate = calculateLabel(offset);
         this.targetReg = RegisterFile.getRegister("ra");
     }
@@ -45,9 +50,9 @@ public class JFormatInstruction extends Instruction {
         StringBuilder sb = new StringBuilder();
 
         try{
-        sb.append(fillWithZero(Integer.toBinaryString(opcode), 6))
+        sb.append(instructionMap.get(functionName))
                 .append(" ");
-        String imm = fillWithZero(Integer.toBinaryString(immediate), 26);
+        String imm = fillWithZero(Integer.toBinaryString(immediate), 11);
         if (imm.length() > 26)
                 imm = imm.substring(imm.length() - 26);
             sb.append(imm);
@@ -69,7 +74,7 @@ public class JFormatInstruction extends Instruction {
         instructionMap = new HashMap<>();
 
         // put instructions
-        instructionMap.put("j", (short)2);  // +
-        instructionMap.put("jal", (short)3);// +
+        instructionMap.put("j", "00010");  // +
+        instructionMap.put("jal", "00110");// +
     }
 }

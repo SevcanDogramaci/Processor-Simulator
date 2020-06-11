@@ -1,22 +1,20 @@
 package sample;
 
 public class ALU {
-    public static final short AND = 0;
-    public static final short OR = 1;
-    public static final short ADD = 2;
-    public static final short XOR = 3;
-    public static final short SLTU = 4;
-    public static final short SUBTRACT = 6;
+
+    public static final short ADD = 0;
+    public static final short SUB = 1;
+    public static final short AND = 2;
+    public static final short OR = 3;
+    public static final short MUL = 4;
+    public static final short SLL = 5;
+    public static final short SRL = 6;
     public static final short SLT = 7;
-    public static final short NOR = 12;
-    public static final short SLL = 13;
-    public static final short SRL = 14;
-    public static final short SRA = 15;
 
     private int out;
     private boolean zero;
 
-    public void setOperation(short control, int srcv, int rsv, int shamt) {
+    public void setOperation(short control, int srcv, int rsv) {
         zero = false;
         out = 0;
 
@@ -26,7 +24,7 @@ public class ALU {
                 out =  rsv + srcv;
                 break;
 
-            case SUBTRACT:
+            case SUB:
                 out = rsv - srcv;
                 if(out == 0) {
                     zero = true;
@@ -41,41 +39,20 @@ public class ALU {
                 out = rsv | srcv;
                 break;
 
-            case NOR:
-                out = ~(rsv | srcv);
-                break;
-
             case SLT:
                 out = rsv < srcv ? 1 : 0;
                 break;
 
             case SLL:
-                if(srcv != 0 && shamt == 0)
-                    out = rsv << srcv;
-                else
-                    out = srcv << shamt;
+                out = srcv << rsv;
                 break;
 
             case SRL:
-                if(srcv != 0 && shamt == 0)
-                    out = rsv >>> srcv;
-                else
-                    out = srcv >>> shamt;
+                out = srcv >>> rsv;
                 break;
 
-            case SRA:
-                if(srcv != 0 && shamt == 0)
-                    out = rsv >> srcv;
-                else
-                    out = srcv >> shamt;
-                break;
-
-            case XOR:
-                out = rsv ^ srcv;
-                break;
-
-            case SLTU:
-                out = Math.abs(rsv)  < Math.abs(srcv) ? 1 : 0;
+            case MUL:
+                out = srcv * rsv; // to be changed according to multiplication implementation
         }
     }
 

@@ -9,38 +9,16 @@ public class RegisterFile {
 
     private Register rr1, rr2, wr;
     private static ArrayList<Register> registers = new ArrayList<>();
+
+    // pc is excluded
     private static String[] registerNames = {
-            "zero",
-            "at",
-            "v0",
-            "v1",
+            "r0",
+            "r1",
+            "r2",
+            "r3",
             "a0",
-            "a1",
-            "a2",
-            "a3",
-            "t0",
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5",
-            "t6",
-            "t7",
-            "s0",
-            "s1",
-            "s2",
-            "s3",
-            "s4",
-            "s5",
-            "s6",
-            "s7",
-            "t8",
-            "t9",
-            "k0",
-            "k1",
-            "gp",
+            "v0",
             "sp",
-            "fp",
             "ra"
         };
 

@@ -3,9 +3,11 @@ package sample;
 public abstract class Instruction extends Data{
 
     protected short opcode;
-    protected int index, shiftAmount, immediate;
+    protected int index, immediate;
     protected Register sourceReg, targetReg, destinationReg;
     protected String line;
+    protected boolean is_imm, is_jump;
+    protected String functionName = "";
 
     public static Instruction createInstruction(String line, int i, Parser parser) throws Exception {
 
@@ -58,11 +60,7 @@ public abstract class Instruction extends Data{
 
     public Register getTargetReg() { return targetReg; }
 
-    public int getShiftAmount() { return shiftAmount; }
-
     public int getImmediate() { return immediate; }
-
-    //public short getAddress() { return address; }
 
     public short getFunction() { return opcode; }
 
@@ -80,5 +78,14 @@ public abstract class Instruction extends Data{
         }
 
         return sBuilder.toString();
+    }
+
+
+    public boolean isImm() {
+        return is_imm;
+    }
+
+    public boolean isJump() {
+        return is_jump;
     }
 }

@@ -4,106 +4,119 @@ public class ControlUnit {
 
     // control lines
     private boolean RegDst;     // rt or rd for write
-    private boolean Branch;
-    private boolean BranchNotEqual;
-    private boolean Jump;
-    private boolean JumpReg;    // jump to register
+    private boolean Branch;     // branch
+    private boolean Jump;       // jump
+    private boolean JumpReg;    // jump to address in register
     private boolean MemRead;    // memory read
     private boolean MemtoReg;   // memory to register
-    private boolean ALUOp1;
-    private boolean ALUOp0;
     private boolean MemWrite;   // memory write
     private boolean ALUsrc;     // reg2 or immediate
     private boolean RegWrite;   // register write
-    private boolean SignExtend;
-    private int branchCode = 0;
+    private boolean ALUOp0;     // ALU operation LSB
+    private boolean ALUOp1;     // ALU operation Middle
+    private boolean ALUOp2;     // ALU operation MSB
+    private boolean ShiftReg;
+
+    //private boolean BranchNotEqual;
+    //private int branchCode = 0;
 
     public ControlUnit(Instruction instruction) {
 
         // specify control lines for R format instructions
         if (instruction.isRFormat()){
-            if(instruction.getFunction() == 8){ // jr
+
+            if (instruction.isJump()) { // jr
                 JumpReg = true;
-                return;
+                ShiftReg = true;
             }
-            else if(instruction.getFunction() == 9){ // jalr
-                JumpReg = true;
+            else {
+                switch (instruction.opcode) {
+                    case 1: // sub
+                        ALUOp0 = true;
+                        break;
+                    case 2: // or
+                        ALUOp1 = true;
+                        ALUOp0 = true;
+                        break;
+                    case 3: // and
+                        ALUOp1 = true;
+                        break;
+                    case 4: // mul
+                        ALUOp2 = true;
+                        break;
+                    case 5: // sll
+                        ALUOp2 = true;
+                        ALUOp0 = true;
+                        break;
+                    case 6: // srl
+                        ALUOp2 = true;
+                        ALUOp1 = true;
+                        break;
+                    case 7: // slt
+                        ALUOp2 = true;
+                        ALUOp1 = true;
+                        ALUOp0 = true;
+                        break;
+                }
             }
             RegDst = true;
             RegWrite = true;
-            ALUOp1 = true;
         }
 
         // specify control lines for I format instructions
         else if (instruction.isIFormat()){
+            RegWrite = true;
+            ALUsrc = true;
+            switch (instruction.opcode) {
+                case 0: // sw
+                    MemWrite = true;
+                    RegWrite = false;
+                    break;
+                case 1: // beq
+                    Branch = true;
+                    RegWrite = false;
+                    ALUsrc = false;
+                    ALUOp0 = true;
+                    break;
+                case 2: // lw
+                    MemRead = true;
+                    break;
+                case 3: // bne
+                    Branch = true;
+                    RegWrite = false;
+                    ALUsrc = false;
+                    RegDst = true;
+                    ALUOp0 = true;
+                    ALUOp1 = true;
+                    ALUOp0 = true;
+                    break;
+                case 4: // muli
+                    ALUOp2 = true;
+                    break;
+                case 5: // lui
+                    ShiftReg = true;
+                    ALUOp2 = true;
+                    ALUOp0 = true;
+                    break;
+                case 7: // slti
+                    ALUOp2 = true;
+                    ALUOp1 = true;
+                    ALUOp0 = true;
+                    break;
+            }
 
-            if(instruction.opcode > 7 && instruction.opcode < 10){  // add
-                ALUsrc = true;
-                RegWrite = true;
-            }
-            else if(instruction.opcode > 9 && instruction.opcode <= 15){  //and, or, xor, lui, slti
-                ALUOp1 = true;
-                ALUsrc = true;
-                RegWrite = true;
-            }
-            else if (instruction.opcode >= 32 && instruction.opcode <= 37){ // load
-                MemRead = true;
-                MemtoReg = true;
-                RegWrite = true;
-                ALUsrc = true;
-                SignExtend = true;
-                if(instruction.opcode == 36 || instruction.opcode == 37){   // unsigned load
-                    SignExtend = false;
-                }
-            }
-            else if(instruction.opcode >= 40 && instruction.opcode <= 43){ // store
-                MemWrite = true;
-                ALUsrc = true;
-            }
-            else if (instruction.opcode == 4){ // beq
-                Branch = true;
-                ALUOp0 = true;
-            }
-            else if (instruction.opcode == 5){ // bne
-                BranchNotEqual = true;
-                ALUOp0 = true;
-            }
-            else if (instruction.opcode == 1){ // bgez, bltz
-                ALUOp1 = true;
-                instruction.opcode = 42;
-
-                // identify function with temporary shift amount value
-                if (instruction.shiftAmount == 1){
-                    instruction.getTargetReg().setRegValue(0);
-                    branchCode = 1;
-                }
-                else{
-                    branchCode = 4;
-                    instruction.getTargetReg().setRegValue(1);
-                }
-            }
-            else if (instruction.opcode == 7){  // bgtz
-                ALUOp1 = true;
-                instruction.opcode = 42;
-                branchCode = 2;
-            }
-            else if(instruction.opcode == 6){   // blez
-                ALUOp1 = true;
-                instruction.opcode = 42;
-                branchCode = 3;
-                instruction.getTargetReg().setRegValue(1);
-            }
         }
 
         // specify control lines for J format instructions
         else if (instruction.isJFormat()){
             Jump = true;
-            ALUOp0 = true;
-            if (instruction.opcode == 3){ // jal
+
+            if (instruction.opcode == 0){ // jal
                 RegWrite = true;
             }
         }
     }
+
 
     public boolean isRegDst() {
         return RegDst;
@@ -111,10 +124,6 @@ public class ControlUnit {
 
     public boolean isBranch() {
         return Branch;
-    }
-
-    public boolean isBranchNotEqual() {
-        return BranchNotEqual;
     }
 
     public boolean isJump() {
@@ -131,6 +140,10 @@ public class ControlUnit {
 
     public boolean isMemtoReg() {
         return MemtoReg;
+    }
+
+    public boolean isALUOp2() {
+        return ALUOp2;
     }
 
     public boolean isALUOp1() {
@@ -153,6 +166,15 @@ public class ControlUnit {
         return RegWrite;
     }
 
+    public boolean isShiftReg() {
+        return ShiftReg;
+    }
+
+    /*
+    public boolean isBranchNotEqual() {
+        return BranchNotEqual;
+    }
+
     public boolean isSignExtend() {
         return SignExtend;
     }
@@ -160,4 +182,6 @@ public class ControlUnit {
     public int getBranchCode() {
         return branchCode;
     }
+    */
+
 }

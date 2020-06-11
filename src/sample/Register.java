@@ -24,8 +24,7 @@ public class Register implements ObservableValue {
 
     public void setRegValue(int regValue) {
         changeListener.changed(this, getRegValue(), regValue);
-        if (!name.equalsIgnoreCase("zero"))
-            this.regValue = regValue;
+        this.regValue = regValue;
     }
 
     public int getNo() { return no; }
