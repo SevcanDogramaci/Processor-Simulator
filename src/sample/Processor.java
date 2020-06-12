@@ -43,7 +43,7 @@ public class Processor {
         int alu_out = 0, data_out = 0, regData1 = 0, regData2 = 0,
                 new_pc = pc.get(), write_data;
         boolean alu_zero;
-        changedMemIdx = - 1;
+        changedMemIdx = -1;
 
         // fetch instruction
         instruction = instructionMemoryFile.fetch(pc);
@@ -83,7 +83,7 @@ public class Processor {
 
         // writeback
         write_data = (int)mux(alu_out, data_out, controlUnit.isMemRead());
-        write_data = (int)mux(write_data, new_pc + 4, controlUnit.isJump());
+        write_data = (int)mux(write_data, new_pc + 2, controlUnit.isJump());
         registerFile.write(controlUnit.isRegWrite(), write_data);
 
 
@@ -93,9 +93,9 @@ public class Processor {
     }
 
     private void updatePc(Instruction instruction, int new_pc, int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
-        new_pc += 4;
+        new_pc += 2;
 
-        int branch_pc = new_pc + (instruction.getImmediate() << 2); // branch address
+        int branch_pc = new_pc + (instruction.getImmediate() << 1); // branch address
 
         boolean is_branch = ((controlUnit.isBranch() && alu_zero) || // beq
                             (controlUnit.isBranch() && controlUnit.isRegDst() && !alu_zero)); // bne
@@ -104,7 +104,7 @@ public class Processor {
         new_pc = (int)mux(new_pc, branch_pc, is_branch); // branch
         new_pc = (int)mux(new_pc, instruction.getImmediate(), controlUnit.isJump()); // jump
         new_pc = (int)mux(new_pc, jr_pc, controlUnit.isJumpReg()); // jr
-
+        System.out.println("new pc: " + new_pc);
         pc.set(new_pc);
     }
 
@@ -121,7 +121,7 @@ public class Processor {
     }
 
     public int getIndex() {
-        return pc.get()/4;
+        return pc.get()/2;
     }
 
     public ObservableList<Data> getStackData(){

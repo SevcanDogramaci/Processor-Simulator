@@ -23,17 +23,17 @@ public class InstructionMemoryFile {
 
     // fetch instruction from instruction memory with pc
     public Instruction fetch(ProgramCounter pc) {
-        return instructions[pc.get()/4];
+        return instructions[pc.get()/2];
     }
 
     public int length() {
-        return instructions.length * 4;
+        return instructions.length * 2;
     }
 
     public static ObservableList<Data> getInstructions() throws Exception {
         List<Data> memoryData = new ArrayList<>();
         for (int i = 0; i < instructions.length; i++) {
-            memoryData.add(new Data(i << 2, instructions[i].getMachineCode()));
+            memoryData.add(new Data(i << 1, instructions[i].getMachineCode()));
         }
         return FXCollections.observableArrayList(memoryData);
     }

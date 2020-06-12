@@ -37,11 +37,12 @@ public class JFormatInstruction extends Instruction {
         String code = instructionMap.get(functionName);
 
         opcode = Short.parseShort(code.substring(0, 3), 2);
-        is_imm = (code.charAt(3) == '1');
-        is_jump = (code.charAt(4) == '1');
+        is_imm = (code.charAt(4) == '1');
+        is_jump = (code.charAt(3) == '1');
 
         // specify instruction fields
         this.immediate = calculateLabel(offset);
+        System.out.println("j imm: " + immediate);
         this.targetReg = RegisterFile.getRegister("ra");
     }
 
@@ -67,7 +68,7 @@ public class JFormatInstruction extends Instruction {
 
     private int calculateLabel(String s) throws Exception {
         // get label address from label address map
-        return parser.getLabelAddress(s.trim()) - index - 1;
+        return parser.getLabelAddress(s.trim())*2;
     }
 
     static {

@@ -7,7 +7,7 @@ public class ProgramCounter {
     }
 
     public void set(int value) {
-        assert value%4 == 0;
+        assert value%2 == 0;
         this.value = value;
     }
 

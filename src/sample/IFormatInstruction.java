@@ -30,8 +30,8 @@ public class IFormatInstruction extends Instruction {
         String code = instructionMap.get(functionName);
 
         opcode = Short.parseShort(code.substring(0, 3), 2);
-        is_imm = (code.charAt(3) == '1');
-        is_jump = (code.charAt(4) == '1');
+        is_imm = (code.charAt(4) == '1');
+        is_jump = (code.charAt(3) == '1');
 
         // source or target register
         instruction[0] = instruction[0].split(" ")[1].trim();

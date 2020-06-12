@@ -29,23 +29,28 @@ public class RFormatInstruction extends Instruction {
         String code = instructionMap.get(functionName);
 
         opcode = Short.parseShort(code.substring(0, 3), 2);
-        is_imm = (code.charAt(3) == '1');
-        is_jump = (code.charAt(4) == '1');
+        is_imm = (code.charAt(4) == '1');
+        is_jump = (code.charAt(3) == '1');
 
         String[] temp = instruction[0].split(" ");
-
+        System.out.println(1);
         if (temp.length <= 1) // syscall or exit.
             return;
 
         instruction[0] = temp[1].trim();
-
+        System.out.println(2);
         try {
             if (is_jump) {
-                sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
+                try{
+                    sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
+                    System.out.println(3);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             } else {
                 destinationReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
-                sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
-                targetReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
+                sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[1].trim()));
+                targetReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[2].trim()));
             }
         }catch (Exception e){
             throw new Exception("Error occurred while parsing instruction!\nCheck instruction format : " + line);
