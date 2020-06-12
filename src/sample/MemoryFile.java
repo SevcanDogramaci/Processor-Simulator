@@ -8,71 +8,63 @@ import java.util.List;
 
 public class MemoryFile {
 
-    public static final int STACK_START = 4000;
+    public static final int STACK_START = 256;
     private Register stackPointer;
     private static byte data[][]; // two dimensional byte array used to reflect two aligned memory.
 
     public MemoryFile(){
         stackPointer = RegisterFile.getRegister("sp");
-        data = new byte[STACK_START >> 2][4];
+        data = new byte[STACK_START >> 1][2];
     }
 
     public static void resetData(){
         for (int i = 0; i < data.length; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < data[i].length; j++) {
                 data[i][j] = 0;
             }
         }
     }
 
     // Do read or write operation if required according to flags.
-    public int cycle(boolean read, boolean write, int index, int writeValue, int accessLength, boolean signed){
-
+    public int cycle(boolean read, boolean write, int index, int writeValue){
+        System.out.println("inputs: " + read + " " + write + " " + index + " " + writeValue);
         if (read){
-            return get(index, accessLength, signed);
+            return get(index);
         }
         else if (write){
-            set(index, writeValue, accessLength);
+            set(index, writeValue);
         }
 
         return 0;
     }
 
     // writes value to memory, (aligned)
-    private void set(int index, int value, int type){
-        byte[] row = data[index >> 2];
-        byte offset = (byte) (index % 4);
+    private void set(int index, int value){
+        byte[] row = data[index>>1];
 
-        int j = 0;
-        for (int i = offset; i < offset + type; i++, j++) {
-            row[i] = (byte) (value >> (type-1-j) * 8);
-        }
+        row[1] = (byte) (value%8);
+        row[0] = (byte) ((value>>8)%8);
     }
 
     // reads value from memory, (aligned)
-    private int get(int index, int type, boolean signed){
-        byte[] row = data[index >> 2];
-        byte offset = (byte) (index % 4);
-        int ret = 0;
+    private int get(int index){
+        byte[] row = data[index>>1];
 
-        int j = 0;
-        for (int i = offset; i < offset + type; i++, j++) {
-            if(i == offset && signed)
-                ret += (row[i]<< (type-1-i) * 8);
-            else
-                ret += (unsignedToBytes(row[i]) << (type-1-j) * 8);
-        }
+        int value = 0;
 
-        return ret;
+        value += (row[0]<<8);
+        value += (unsignedToBytes(row[1]));
+
+        return value;
     }
+
 
     public ObservableList<Data> getMemoryData (){
 
         List<Data> memoryData = new ArrayList<>();
 
-        for (int i = data.length - 1; i >= stackPointer.getRegValue() >> 2; i--) {
+        for (int i = data.length - 1; i >= stackPointer.getRegValue() >> 1; i--) {
 
-            String address = String.format("%6d", i << 2);
             StringBuilder val = new StringBuilder();
             byte[] row = data[i];
             for (int j = 0; j < row.length; j++) {
@@ -80,7 +72,7 @@ public class MemoryFile {
                         .replace(' ', '0')).append(" ");
             }
 
-            Data datum = new Data(i << 2, val.toString());
+            Data datum = new Data(i << 1, val.toString());
             memoryData.add(datum);
         }
 
