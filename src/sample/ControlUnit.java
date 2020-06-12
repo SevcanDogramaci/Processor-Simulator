@@ -95,7 +95,7 @@ public class ControlUnit {
         else if (instruction.isJFormat()){
             Jump = true;
 
-            if (instruction.opcode == 0){ // jal
+            if (instruction.opcode == 1){ // jal
                 RegWrite = true;
             }
         }

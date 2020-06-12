@@ -30,8 +30,8 @@ public class IFormatInstruction extends Instruction {
         String code = instructionMap.get(functionName);
 
         opcode = Short.parseShort(code.substring(0, 3), 2);
-        is_imm = (code.charAt(3) == '1');
-        is_jump = (code.charAt(4) == '1');
+        is_imm = (code.charAt(4) == '1');
+        is_jump = (code.charAt(3) == '1');
 
         // source or target register
         instruction[0] = instruction[0].split(" ")[1].trim();
@@ -112,17 +112,16 @@ public class IFormatInstruction extends Instruction {
         instructionMap = new HashMap<>();
 
         // put instructions
-        instructionMap.put("lui", "10101");  // +
+        instructionMap.put("lui", "10101"); // +
 
-        instructionMap.put("slti", "11101");   // +
+        instructionMap.put("slti", "11101");// +
 
-        instructionMap.put("muli", "10001");    // +
-        instructionMap.put("beq", "00101");    // +
+        instructionMap.put("muli", "10001");// +
+        instructionMap.put("beq", "00101"); // +
 
-        instructionMap.put("bne", "01101");    // +
-
+        instructionMap.put("bne", "01101"); // +
 
         instructionMap.put("lw", "01001");  // +
-        instructionMap.put("sw", "00001");    // +
+        instructionMap.put("sw", "00001");  // +
     }
 }

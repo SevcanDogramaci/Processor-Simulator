@@ -6,8 +6,8 @@ public class ProgramCounter {
         value = 0; // start from 0
     }
 
-    public void set(int value) {
-        assert value%4 == 0;
+    public void set(int value) throws Exception {
+        if (value%2 != 0) throw new Exception("Illegal address !");
         this.value = value;
     }
 

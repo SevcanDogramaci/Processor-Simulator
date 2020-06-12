@@ -37,8 +37,8 @@ public class JFormatInstruction extends Instruction {
         String code = instructionMap.get(functionName);
 
         opcode = Short.parseShort(code.substring(0, 3), 2);
-        is_imm = (code.charAt(3) == '1');
-        is_jump = (code.charAt(4) == '1');
+        is_imm = (code.charAt(4) == '1');
+        is_jump = (code.charAt(3) == '1');
 
         // specify instruction fields
         this.immediate = calculateLabel(offset);
@@ -53,8 +53,8 @@ public class JFormatInstruction extends Instruction {
         sb.append(instructionMap.get(functionName))
                 .append(" ");
         String imm = fillWithZero(Integer.toBinaryString(immediate), 11);
-        if (imm.length() > 26)
-                imm = imm.substring(imm.length() - 26);
+        if (imm.length() > 11)
+                imm = imm.substring(imm.length() - 11);
             sb.append(imm);
         }
 
@@ -67,7 +67,7 @@ public class JFormatInstruction extends Instruction {
 
     private int calculateLabel(String s) throws Exception {
         // get label address from label address map
-        return parser.getLabelAddress(s.trim()) - index - 1;
+        return parser.getLabelAddress(s.trim())*2;
     }
 
     static {

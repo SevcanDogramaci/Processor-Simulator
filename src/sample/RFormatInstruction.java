@@ -29,8 +29,8 @@ public class RFormatInstruction extends Instruction {
         String code = instructionMap.get(functionName);
 
         opcode = Short.parseShort(code.substring(0, 3), 2);
-        is_imm = (code.charAt(3) == '1');
-        is_jump = (code.charAt(4) == '1');
+        is_imm = (code.charAt(4) == '1');
+        is_jump = (code.charAt(3) == '1');
 
         String[] temp = instruction[0].split(" ");
 
@@ -44,8 +44,8 @@ public class RFormatInstruction extends Instruction {
                 sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
             } else {
                 destinationReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
-                sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
-                targetReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
+                sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[1].trim()));
+                targetReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[2].trim()));
             }
         }catch (Exception e){
             throw new Exception("Error occurred while parsing instruction!\nCheck instruction format : " + line);
@@ -89,6 +89,6 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("slt", "11100");   // +
         instructionMap.put("srl", "11000");   // +
 
-        instructionMap.put("mul", "10000");  // +
+        instructionMap.put("mul", "10000");   // +
     }
 }
