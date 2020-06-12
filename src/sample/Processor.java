@@ -52,58 +52,58 @@ public class Processor {
         // send instruction to control unit
         ControlUnit controlUnit = new ControlUnit(instruction);
 
+
         // extract registers' data that will be used
         Register sourceReg = instruction.getSourceReg(),
                 targetReg = instruction.getTargetReg(),
                 destinationReg = instruction.getDestinationReg();
 
-        Register writeReg = (Register) mux(targetReg, destinationReg , controlUnit.isRegDst());
+        Register writeReg1 = (Register) mux(targetReg, destinationReg , controlUnit.isRegDst());
+        Register writeReg2 = RegisterFile.getRegister("7"); // ra register
+        Register writeReg = (Register) mux(writeReg1, writeReg2, controlUnit.isJump());
+
         registerFile.setRegisters(sourceReg, targetReg, writeReg);
         regData1 = registerFile.readData1();
         regData2 = registerFile.readData2();
 
+
         // ALU performs operation
         alu.setOperation(
-                ALUControl.getControl(controlUnit.isALUOp1(), controlUnit.isALUOp0(), instruction.getFunction()),
+                controlUnit.getALUOp(),
                 (int)mux(regData2, instruction.getImmediate(), controlUnit.isALUsrc()),
-                regData1, instruction.getShiftAmount());
+                (int)mux(regData1, 8, controlUnit.isShiftReg()));
         alu_out = alu.getOut();
         alu_zero = alu.isZero();
 
-        // memory operations
-        int accessLength = instruction instanceof IFormatInstruction
-                ? ((IFormatInstruction)instruction).getAccessLength() : 4;
 
-        data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(),
-                alu_out, regData2, accessLength, controlUnit.isSignExtend());
+        data_out = memory.cycle(controlUnit.isMemRead(), controlUnit.isMemWrite(), alu_out, regData2);
         if(controlUnit.isMemRead() || controlUnit.isMemWrite())
             changedMemIdx = alu_out;
 
+
         // writeback
-        write_data = (int)mux(alu_out, data_out, controlUnit.isMemtoReg());
-        write_data = (int)mux(write_data, new_pc + 4,
-                (controlUnit.isJump() && !controlUnit.isMemtoReg())
-                        || (controlUnit.isRegWrite() && controlUnit.isJumpReg()));
+        write_data = (int)mux(alu_out, data_out, controlUnit.isMemRead());
+        write_data = (int)mux(write_data, new_pc + 4, controlUnit.isJump());
         registerFile.write(controlUnit.isRegWrite(), write_data);
 
 
         // update pc 
-        updatePc(instruction, new_pc, alu_out, regData1, alu_zero, controlUnit);
+        updatePc(instruction, new_pc, regData1, alu_zero, controlUnit);
 
     }
 
-    private void updatePc(Instruction instruction, int new_pc, int alu_out,  int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
+    private void updatePc(Instruction instruction, int new_pc, int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
         new_pc += 4;
 
-        int branch_pc = new_pc + (instruction.getImmediate() << 2);
-        boolean branch = getBranch(controlUnit, alu_out);
+        int branch_pc = new_pc + (instruction.getImmediate() << 2); // branch address
+
+        boolean is_branch = ((controlUnit.isBranch() && alu_zero) || // beq
+                            (controlUnit.isBranch() && controlUnit.isRegDst() && !alu_zero)); // bne
 
         // update pc if branching or jumping exists
-        new_pc = (int)mux(new_pc, branch_pc, ((controlUnit.isBranch() && alu_zero) || branch)||
-                (controlUnit.isBranchNotEqual() && !alu_zero) ||
-                controlUnit.isJump());
-
-        new_pc = (int)mux(new_pc, jr_pc, controlUnit.isJumpReg());
+        new_pc = (int)mux(new_pc, branch_pc, is_branch); // branch
+        new_pc = (int)mux(new_pc, instruction.getImmediate(), controlUnit.isJump()); // jump
+        new_pc = (int)mux(new_pc, jr_pc, controlUnit.isJumpReg()); // jr
 
         pc.set(new_pc);
     }
@@ -114,22 +114,6 @@ public class Processor {
             return value2;
         }
         return value1;
-    }
-
-    private boolean getBranch(ControlUnit controlUnit, int out) {
-        boolean b1 = false;
-
-        switch (controlUnit.getBranchCode()){
-            case 1:
-            case 2:
-                b1 = out != 1;
-                break;
-            case 3:
-            case 4:
-                b1 = out == 1;
-                break;
-        }
-        return b1;
     }
 
     public boolean isDone() {

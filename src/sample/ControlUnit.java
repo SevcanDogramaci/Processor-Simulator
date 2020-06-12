@@ -8,17 +8,11 @@ public class ControlUnit {
     private boolean Jump;       // jump
     private boolean JumpReg;    // jump to address in register
     private boolean MemRead;    // memory read
-    private boolean MemtoReg;   // memory to register
     private boolean MemWrite;   // memory write
     private boolean ALUsrc;     // reg2 or immediate
     private boolean RegWrite;   // register write
-    private boolean ALUOp0;     // ALU operation LSB
-    private boolean ALUOp1;     // ALU operation Middle
-    private boolean ALUOp2;     // ALU operation MSB
     private boolean ShiftReg;
-
-    //private boolean BranchNotEqual;
-    //private int branchCode = 0;
+    private short ALUOp = 0;
 
     public ControlUnit(Instruction instruction) {
 
@@ -32,30 +26,25 @@ public class ControlUnit {
             else {
                 switch (instruction.opcode) {
                     case 1: // sub
-                        ALUOp0 = true;
+                        ALUOp = 1;
                         break;
                     case 2: // and
-                        ALUOp1 = true;
+                        ALUOp = 2;
                         break;
                     case 3: // or
-                        ALUOp1 = true;
-                        ALUOp0 = true;
+                        ALUOp = 3;
                         break;
                     case 4: // mul
-                        ALUOp2 = true;
+                        ALUOp = 4;
                         break;
                     case 5: // sll
-                        ALUOp2 = true;
-                        ALUOp0 = true;
+                        ALUOp = 5;
                         break;
                     case 6: // srl
-                        ALUOp2 = true;
-                        ALUOp1 = true;
+                        ALUOp = 6;
                         break;
                     case 7: // slt
-                        ALUOp2 = true;
-                        ALUOp1 = true;
-                        ALUOp0 = true;
+                        ALUOp = 7;
                         break;
                 }
             }
@@ -76,7 +65,7 @@ public class ControlUnit {
                     Branch = true;
                     RegWrite = false;
                     ALUsrc = false;
-                    ALUOp0 = true;
+                    ALUOp = 1;
                     break;
                 case 2: // lw
                     MemRead = true;
@@ -86,22 +75,17 @@ public class ControlUnit {
                     RegWrite = false;
                     ALUsrc = false;
                     RegDst = true;
-                    ALUOp0 = true;
-                    ALUOp1 = true;
-                    ALUOp0 = true;
+                    ALUOp = 1;
                     break;
                 case 4: // muli
-                    ALUOp2 = true;
+                    ALUOp = 4;
                     break;
                 case 5: // lui
                     ShiftReg = true;
-                    ALUOp2 = true;
-                    ALUOp0 = true;
+                    ALUOp = 5;
                     break;
                 case 7: // slti
-                    ALUOp2 = true;
-                    ALUOp1 = true;
-                    ALUOp0 = true;
+                    ALUOp = 7;
                     break;
             }
 
@@ -117,6 +101,9 @@ public class ControlUnit {
         }
     }
 
+    public short getALUOp() {
+        return ALUOp;
+    }
 
     public boolean isRegDst() {
         return RegDst;
@@ -138,22 +125,6 @@ public class ControlUnit {
         return MemRead;
     }
 
-    public boolean isMemtoReg() {
-        return MemtoReg;
-    }
-
-    public boolean isALUOp2() {
-        return ALUOp2;
-    }
-
-    public boolean isALUOp1() {
-        return ALUOp1;
-    }
-
-    public boolean isALUOp0() {
-        return ALUOp0;
-    }
-
     public boolean isMemWrite() {
         return MemWrite;
     }
@@ -169,19 +140,4 @@ public class ControlUnit {
     public boolean isShiftReg() {
         return ShiftReg;
     }
-
-    /*
-    public boolean isBranchNotEqual() {
-        return BranchNotEqual;
-    }
-
-    public boolean isSignExtend() {
-        return SignExtend;
-    }
-
-    public int getBranchCode() {
-        return branchCode;
-    }
-    */
-
 }
