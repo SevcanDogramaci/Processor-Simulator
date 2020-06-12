@@ -8,13 +8,13 @@ import java.util.List;
 
 public class MemoryFile {
 
-    public static final int STACK_START = 256;
+    public static final int STACK_START = 255;
     private Register stackPointer;
     private static byte data[][]; // two dimensional byte array used to reflect two aligned memory.
 
     public MemoryFile(){
         stackPointer = RegisterFile.getRegister("sp");
-        data = new byte[STACK_START >> 1][2];
+        data = new byte[(STACK_START+1) >> 1][2];
     }
 
     public static void resetData(){
@@ -40,10 +40,13 @@ public class MemoryFile {
 
     // writes value to memory, (aligned)
     private void set(int index, int value){
+        System.out.println("Index : " + index);
+        System.out.println("Value : " + value);
         byte[] row = data[index>>1];
 
         row[1] = (byte) (value%8);
         row[0] = (byte) ((value>>8)%8);
+        System.out.println("Rows : " + row[1] + "-" + row[0]);
     }
 
     // reads value from memory, (aligned)
@@ -63,7 +66,7 @@ public class MemoryFile {
 
         List<Data> memoryData = new ArrayList<>();
 
-        for (int i = data.length - 1; i >= stackPointer.getRegValue() >> 1; i--) {
+        for (int i = data.length - 1; i >= 0; i--) {
 
             StringBuilder val = new StringBuilder();
             byte[] row = data[i];
