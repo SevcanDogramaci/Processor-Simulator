@@ -40,13 +40,10 @@ public class MemoryFile {
 
     // writes value to memory, (aligned)
     private void set(int index, int value){
-        System.out.println("Index : " + index);
-        System.out.println("Value : " + value);
         byte[] row = data[index>>1];
 
         row[1] = (byte) (value%(STACK_START+1));
         row[0] = (byte) ((value>>8)%(STACK_START+1));
-        System.out.println("Rows : " + row[1] + "-" + row[0]);
     }
 
     // reads value from memory, (aligned)
