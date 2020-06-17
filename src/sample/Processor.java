@@ -33,7 +33,7 @@ public class Processor {
         memory.resetData();
     }
 
-    public void step() {
+    public void step() throws Exception {
 
         if(isDone()) {
             return;
@@ -58,6 +58,7 @@ public class Processor {
                 targetReg = instruction.getTargetReg(),
                 destinationReg = instruction.getDestinationReg();
 
+
         Register writeReg1 = (Register) mux(targetReg, destinationReg , controlUnit.isRegDst());
         Register writeReg2 = RegisterFile.getRegister("7"); // ra register
         Register writeReg = (Register) mux(writeReg1, writeReg2, controlUnit.isJump());
@@ -66,7 +67,7 @@ public class Processor {
         regData1 = registerFile.readData1();
         regData2 = registerFile.readData2();
 
-
+        LCDDisplay.setValue(controlUnit.isCall(), regData1, instruction);
         // ALU performs operation
         alu.setOperation(
                 controlUnit.getALUOp(),
@@ -91,8 +92,7 @@ public class Processor {
         updatePc(instruction, new_pc, regData1, alu_zero, controlUnit);
 
     }
-
-    private void updatePc(Instruction instruction, int new_pc, int jr_pc, boolean alu_zero, ControlUnit controlUnit) {
+    private void updatePc(Instruction instruction, int new_pc, int jr_pc, boolean alu_zero, ControlUnit controlUnit) throws Exception {
         new_pc += 2;
 
         int branch_pc = new_pc + (instruction.getImmediate() << 1); // branch address
@@ -127,6 +127,7 @@ public class Processor {
     public ObservableList<Data> getStackData(){
         return memory.getMemoryData();
     }
+
     public int getChangedMemIdx(){return changedMemIdx;}
 
 }

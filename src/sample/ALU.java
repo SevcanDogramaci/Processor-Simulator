@@ -15,6 +15,8 @@ public class ALU {
     private boolean zero;
 
     public void setOperation(short control, int srcv, int rsv) {
+        System.out.println("srcv : " + srcv);
+        System.out.println("rsv : " + rsv);
         zero = false;
         out = 0;
 

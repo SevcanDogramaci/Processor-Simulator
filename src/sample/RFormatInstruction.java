@@ -33,17 +33,15 @@ public class RFormatInstruction extends Instruction {
         is_jump = (code.charAt(3) == '1');
 
         String[] temp = instruction[0].split(" ");
-        System.out.println(1);
         if (temp.length <= 1) // syscall or exit.
             return;
 
         instruction[0] = temp[1].trim();
-        System.out.println(2);
+
         try {
             if (is_jump) {
                 try{
                     sourceReg = RegisterFile.getRegister(Register.extractRegisterName(instruction[0]));
-                    System.out.println(3);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -94,6 +92,7 @@ public class RFormatInstruction extends Instruction {
         instructionMap.put("slt", "11100");   // +
         instructionMap.put("srl", "11000");   // +
 
-        instructionMap.put("mul", "10000");  // +
+        instructionMap.put("mul", "10000");   // +
+        instructionMap.put("syscall", "10110");
     }
 }

@@ -94,8 +94,8 @@ public class IFormatInstruction extends Instruction {
 
         try {
             sb.append(instructionMap.get(functionName)).append(" ")
-                    .append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 5)).append(" ")
-                    .append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 5)).append(" ");
+                    .append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 3)).append(" ")
+                    .append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 3)).append(" ");
 
             String imm = fillWithZero(Integer.toBinaryString(immediate), 5);
             if (imm.length() > 5)
@@ -112,17 +112,16 @@ public class IFormatInstruction extends Instruction {
         instructionMap = new HashMap<>();
 
         // put instructions
-        instructionMap.put("lui", "10101");  // +
+        instructionMap.put("lui", "10101"); // +
 
-        instructionMap.put("slti", "11101");   // +
+        instructionMap.put("slti", "11101");// +
 
-        instructionMap.put("muli", "10001");    // +
-        instructionMap.put("beq", "00101");    // +
+        instructionMap.put("muli", "10001");// +
+        instructionMap.put("beq", "00101"); // +
 
-        instructionMap.put("bne", "01101");    // +
-
+        instructionMap.put("bne", "01101"); // +
 
         instructionMap.put("lw", "01001");  // +
-        instructionMap.put("sw", "00001");    // +
+        instructionMap.put("sw", "00001");  // +
     }
 }

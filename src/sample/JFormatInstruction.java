@@ -54,8 +54,8 @@ public class JFormatInstruction extends Instruction {
         sb.append(instructionMap.get(functionName))
                 .append(" ");
         String imm = fillWithZero(Integer.toBinaryString(immediate), 11);
-        if (imm.length() > 26)
-                imm = imm.substring(imm.length() - 26);
+        if (imm.length() > 11)
+                imm = imm.substring(imm.length() - 11);
             sb.append(imm);
         }
 

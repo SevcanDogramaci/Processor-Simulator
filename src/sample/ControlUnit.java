@@ -12,6 +12,7 @@ public class ControlUnit {
     private boolean ALUsrc;     // reg2 or immediate
     private boolean RegWrite;   // register write
     private boolean ShiftReg;
+    private boolean Call;
     private short ALUOp = 0;
 
     public ControlUnit(Instruction instruction) {
@@ -20,6 +21,10 @@ public class ControlUnit {
         if (instruction.isRFormat()){
 
             if (instruction.isJump()) { // jr
+                if (instruction.opcode == 5){
+                    Call = true;
+                    return;
+                }
                 JumpReg = true;
                 ShiftReg = true;
             }
@@ -140,5 +145,9 @@ public class ControlUnit {
 
     public boolean isShiftReg() {
         return ShiftReg;
+    }
+
+    public boolean isCall() {
+        return Call;
     }
 }
