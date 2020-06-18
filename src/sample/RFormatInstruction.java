@@ -59,14 +59,14 @@ public class RFormatInstruction extends Instruction {
     public String getMachineCode() throws Exception {
         StringBuilder sb = new StringBuilder();
         try {
-            sb.append(instructionMap.get(functionName));
+            sb.append(instructionMap.get(functionName)).append(" ");
             if (is_jump){
-                sb.append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 3));
+                sb.append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 3)).append(" ");
                 sb.append(fillWithZero("", 8));
             } else {
-                sb.append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 3));
-                sb.append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 3));
-                sb.append(fillWithZero(Integer.toBinaryString(destinationReg.getNo()), 3));
+                sb.append(fillWithZero(Integer.toBinaryString(sourceReg.getNo()), 3)).append(" ");
+                sb.append(fillWithZero(Integer.toBinaryString(targetReg.getNo()), 3)).append(" ");
+                sb.append(fillWithZero(Integer.toBinaryString(destinationReg.getNo()), 3)).append(" ");
                 sb.append(fillWithZero("", 2));
             }
         } catch (Exception e){
