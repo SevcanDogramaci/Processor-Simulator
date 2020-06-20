@@ -64,7 +64,7 @@
                                                             <Image url="@lcd.jpeg" />
                                                         </image>
                                                     </ImageView>
-                                                    <Label fx:id="lcdLabel" alignment="CENTER" layoutX="98.0" layoutY="60.0" prefHeight="36.0" prefWidth="50.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="186.14594650268555" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
+                                                    <Label fx:id="lcdLabel" alignment="CENTER" layoutX="98.0" layoutY="60.0" prefHeight="36.0" prefWidth="50.0" textAlignment="CENTER" AnchorPane.bottomAnchor="186.14594650268555" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
                                                         <padding>
                                                             <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                                         </padding>
@@ -87,12 +87,15 @@
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                         <children>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.halignment="CENTER">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.halignment="LEFT">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg0" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg0" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl0" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -104,12 +107,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl1" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -121,12 +127,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg2" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg2" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl2" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -138,12 +147,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg3" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg3" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl3" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -155,12 +167,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg4" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg4" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl4" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -172,12 +187,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg5" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg5" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl5" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -189,12 +207,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg6" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg6" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl6" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -206,12 +227,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg7" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg7" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl7" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -223,12 +247,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg8" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg8" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl8" text="RegDst" textAlignment="CENTER">
                                                                         <font>
@@ -240,12 +267,15 @@
                                                                     </Label>
                                                                 </children>
                                                             </HBox>
-                                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg9" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                    <ImageView fx:id="csImg9" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
+                                                      <HBox.margin>
+                                                         <Insets left="10.0" />
+                                                      </HBox.margin>
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl9" text="RegDst" textAlignment="CENTER">
                                                                         <font>
