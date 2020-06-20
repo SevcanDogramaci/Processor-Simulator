@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static String appName = "MIPS Simulator";
+    private static String appName = "RISC-Based Simulator";
 
     @Override
     public void start(Stage primaryStage) throws Exception{
