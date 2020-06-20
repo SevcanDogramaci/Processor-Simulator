@@ -2,6 +2,8 @@ package sample;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
@@ -13,9 +15,9 @@ import javafx.util.Duration;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 import java.io.File;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Controller {
 
@@ -27,6 +29,11 @@ public class Controller {
     @FXML private TableColumn<Register, Integer> rNo, rValue;
     @FXML private TableView<Data> textSegTable, sTable;
     @FXML private TableColumn<Data, String > textSegAddress, textSegValue, sAddress, sValue;
+    @FXML private Label csLbl0, csLbl1, csLbl2, csLbl3, csLbl4, csLbl5, csLbl6, csLbl7, csLbl8, csLbl9, pcLabel, lcdLabel;
+    @FXML private ImageView csImg0, csImg1, csImg2, csImg3, csImg4, csImg5, csImg6, csImg7, csImg8, csImg9;
+    private List<ImageView> csImgs;
+    private List<Label> csLbls;
+    private Image ledOn, ledOff;
 
     private final short TOOLTIP_DELAY = 10;
     private Parser parser;
@@ -79,6 +86,7 @@ public class Controller {
         setUpTablePlaceholders();
         setupRegisterTable();
 
+        setupControlSignal();
         createButtonTooltip("Run", TOOLTIP_DELAY, btnRun);
         createButtonTooltip("Choose File", TOOLTIP_DELAY, btnChoose);
         createButtonTooltip("Reset", TOOLTIP_DELAY, btnReset);
@@ -196,6 +204,7 @@ public class Controller {
                 rTable.refresh();
                 setupStackTable(processor.getStackData());
                 selectLine(processor.getIndex());
+                setProgramStatus(processor);
             } else {
                 //setRectY(0);
                 //assemblyCodeArea.selectRange(0,0);
@@ -301,5 +310,37 @@ public class Controller {
                 startAgain();
         } else
             System.exit(0);
+    }
+
+
+    private void setupControlSignal() {
+        ledOff = new Image("/res/ledOff.png");
+        ledOn = new Image("/res/ledOn.png");
+        csLbls = new ArrayList<>(Arrays.asList(csLbl0, csLbl1, csLbl2, csLbl3, csLbl4, csLbl5, csLbl6, csLbl7, csLbl8, csLbl9));
+        csImgs = new ArrayList<>(Arrays.asList(csImg0, csImg1, csImg2, csImg3, csImg4, csImg5, csImg6, csImg7, csImg8, csImg9));
+    }
+
+
+    private void setProgramStatus(Processor processor){
+        setControlSignals(processor.getControlSignals());
+        pcLabel.setText(String.valueOf(processor.getIndex()*2));
+        lcdLabel.setText(LCDDisplay.displayString);
+    }
+
+
+    private void setControlSignals(Map<String, Boolean> controlSignals){
+        AtomicInteger i = new AtomicInteger();
+
+        controlSignals.forEach((csName, csVal) -> {
+            System.out.println(csName + ": " + csVal);
+            System.out.println(ledOn.widthProperty());
+            if (csVal)
+                csImgs.get(i.get()).setImage(ledOn);
+            else
+                csImgs.get(i.get()).setImage(ledOff);
+            csLbls.get(i.get()).setText(csName);
+            i.getAndIncrement();
+        });
+
     }
 }

@@ -3,6 +3,7 @@ package sample;
 import javafx.collections.ObservableList;
 
 import java.util.List;
+import java.util.Map;
 
 public class Processor {
 
@@ -11,6 +12,7 @@ public class Processor {
     private InstructionMemoryFile instructionMemoryFile;
     private MemoryFile memory;
     private ALU alu;
+    private ControlUnit controlUnit;
     private int changedMemIdx;
 
     public Processor() { // Initialize components that are connected to processor.
@@ -50,7 +52,7 @@ public class Processor {
 
 
         // send instruction to control unit
-        ControlUnit controlUnit = new ControlUnit(instruction);
+        controlUnit = new ControlUnit(instruction);
 
 
         // extract registers' data that will be used
@@ -129,5 +131,9 @@ public class Processor {
     }
 
     public int getChangedMemIdx(){return changedMemIdx;}
+
+    public Map<String, Boolean> getControlSignals(){
+        return controlUnit.getControlSignal();
+    }
 
 }
