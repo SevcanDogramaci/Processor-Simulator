@@ -171,4 +171,21 @@ public class ControlUnit {
 
         return controlSignals;
     }
+
+    public static Map<String, Boolean> getControlSignalFalse(){
+        Map<String, Boolean> controlSignals = new TreeMap<>();
+
+        controlSignals.put("RegDst", false);
+        controlSignals.put("Branch", false);
+        controlSignals.put("Jump", false);
+        controlSignals.put("JumpReg", false);
+        controlSignals.put("MemRead", false);
+        controlSignals.put("MemWrite", false);
+        controlSignals.put("ALUsrc", false);
+        controlSignals.put("RegWrite", false);
+        controlSignals.put("ShiftReg", false);
+        controlSignals.put("Call", false);
+
+        return controlSignals;
+    }
 }
