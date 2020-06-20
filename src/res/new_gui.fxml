@@ -52,27 +52,25 @@
                                                     </items>
                                                 </SplitPane>
                                             </AnchorPane>
-                                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                            <AnchorPane prefHeight="282.0" prefWidth="246.0">
                                                 <children>
                                                     <Label fx:id="rLabel1" alignment="CENTER" prefHeight="45.0" prefWidth="246.0" text="Program Status" textAlignment="CENTER">
                                                         <font>
                                                             <Font name="Segoe UI Bold" size="17.0" />
                                                         </font>
                                                     </Label>
-                                                    <ImageView fitHeight="64.0" fitWidth="171.0" layoutX="70.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="186.14594650268555" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
+                                                    <ImageView fitHeight="66.0" fitWidth="230.0" layoutX="35.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="31.441177368164062" AnchorPane.topAnchor="71.0">
                                                         <image>
                                                             <Image url="@lcd.jpeg" />
                                                         </image>
                                                     </ImageView>
-                                                    <Label fx:id="lcdLabel" alignment="CENTER" layoutX="98.0" layoutY="60.0" prefHeight="36.0" prefWidth="50.0" textAlignment="CENTER" AnchorPane.bottomAnchor="186.14594650268555" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
+                                                    <Label fx:id="lcdLabel" alignment="CENTER" layoutX="41.0" layoutY="76.0" prefHeight="68.0" prefWidth="169.0" textAlignment="CENTER" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="71.0">
                                                         <padding>
                                                             <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                                         </padding>
-                                                    </Label>
-                                                    <Label fx:id="rLabel11" alignment="CENTER" layoutX="7.0" layoutY="112.0" prefHeight="38.0" prefWidth="246.0" text="Control Signals" textAlignment="CENTER" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="112.0">
-                                                        <font>
-                                                            <Font name="Segoe UI Bold" size="15.0" />
-                                                        </font>
+                                          <font>
+                                             <Font name="Consolas Bold" size="13.0" />
+                                          </font>
                                                     </Label>
                                                     <GridPane fx:id="csGrid" layoutX="23.0" layoutY="159.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
                                                         <columnConstraints>
@@ -89,7 +87,7 @@
                                                         <children>
                                                             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.halignment="LEFT">
                                                                 <children>
-                                                                    <ImageView fx:id="csImg0" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                                                                    <ImageView fx:id="csImg0" fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                                                                         <image>
                                                                             <Image url="@ledOff.png" />
                                                                         </image>
@@ -99,7 +97,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl0" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -119,7 +117,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl1" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -139,7 +137,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl2" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -159,7 +157,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl3" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -179,7 +177,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl4" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -199,7 +197,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl5" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -219,7 +217,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl6" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -239,7 +237,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl7" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -259,7 +257,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl8" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -279,7 +277,7 @@
                                                                     </ImageView>
                                                                     <Label fx:id="csLbl9" text="RegDst" textAlignment="CENTER">
                                                                         <font>
-                                                                            <Font size="9.0" />
+                                                                            <Font name="Segoe UI" size="10.0" />
                                                                         </font>
                                                                         <HBox.margin>
                                                                             <Insets left="10.0" />
@@ -289,23 +287,17 @@
                                                             </HBox>
                                                         </children>
                                                     </GridPane>
-                                                    <VBox layoutX="3.0" layoutY="48.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="72.0" AnchorPane.bottomAnchor="186.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="48.0">
-                                                        <children>
-                                                            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="9.0" prefWidth="72.0" text="PC" textAlignment="CENTER">
-                                                                <font>
-                                                                    <Font name="Segoe UI" size="14.0" />
-                                                                </font>
-                                                                <VBox.margin>
-                                                                    <Insets top="12.0" />
-                                                                </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="pcLabel" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="16.0" prefWidth="72.0" text="128" textAlignment="CENTER" textFill="#b20000">
-                                                                <font>
-                                                                    <Font name="Segoe UI Bold" size="12.0" />
-                                                                </font>
-                                                            </Label>
-                                                        </children>
-                                                    </VBox>
+                                                    <VBox layoutX="3.0" layoutY="48.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="72.0" AnchorPane.bottomAnchor="186.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="48.0" />
+                                                      <Label fx:id="pcLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="46.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="16.0" prefWidth="72.0" text="0" textAlignment="CENTER" textFill="#b20000">
+                                                          <font>
+                                                              <Font name="Segoe UI Bold" size="12.0" />
+                                                          </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" layoutX="61.0" layoutY="45.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="9.0" prefWidth="72.0" text=" PC :" textAlignment="CENTER">
+                                                          <font>
+                                                              <Font name="Segoe UI" size="14.0" />
+                                                          </font>
+                                                      </Label>
                                                 </children>
                                             </AnchorPane>
                                         </items>
@@ -384,7 +376,7 @@
                                     <children>
                                         <TableView fx:id="sTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn prefWidth="300.0" text="Stack">
+                                                <TableColumn prefWidth="300.0" text="Data Segment">
                                                     <columns>
                                                         <TableColumn fx:id="sAddress" editable="false" maxWidth="1500.0" prefWidth="179.0" sortType="DESCENDING" styleClass="aligned-column" text="Address" />
                                                         <TableColumn id="textSegValue" fx:id="sValue" prefWidth="153.0" text="Value" />
