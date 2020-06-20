@@ -1,5 +1,9 @@
 package sample;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class ControlUnit {
 
     // control lines
@@ -149,5 +153,22 @@ public class ControlUnit {
 
     public boolean isCall() {
         return Call;
+    }
+
+    public Map<String, Boolean> getControlSignal(){
+        Map<String, Boolean> controlSignals = new TreeMap<>();
+
+        controlSignals.put("RegDst", RegDst);
+        controlSignals.put("Branch", Branch);
+        controlSignals.put("Jump", Jump);
+        controlSignals.put("JumpReg", JumpReg);
+        controlSignals.put("MemRead", MemRead);
+        controlSignals.put("MemWrite", MemWrite);
+        controlSignals.put("ALUsrc", ALUsrc);
+        controlSignals.put("RegWrite", RegWrite);
+        controlSignals.put("ShiftReg", ShiftReg);
+        controlSignals.put("Call", Call);
+
+        return controlSignals;
     }
 }
