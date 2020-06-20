@@ -193,6 +193,9 @@ public class Controller {
         setupTextSegmentTable();
         setupStackTable(processor.getStackData());
         selectLine(0);
+        setControlSignals(ControlUnit.getControlSignalFalse());
+        pcLabel.setText("0");
+        lcdLabel.setText("");
     }
 
     @FXML
@@ -279,6 +282,10 @@ public class Controller {
         RegisterFile.resetData();
         rTable.refresh();
 
+        setControlSignals(ControlUnit.getControlSignalFalse());
+        pcLabel.setText("0");
+        lcdLabel.setText("");
+
         try {
             MemoryFile.resetData();
         } catch (Exception e){
@@ -318,6 +325,7 @@ public class Controller {
         ledOn = new Image("/res/ledOn.png");
         csLbls = new ArrayList<>(Arrays.asList(csLbl0, csLbl1, csLbl2, csLbl3, csLbl4, csLbl5, csLbl6, csLbl7, csLbl8, csLbl9));
         csImgs = new ArrayList<>(Arrays.asList(csImg0, csImg1, csImg2, csImg3, csImg4, csImg5, csImg6, csImg7, csImg8, csImg9));
+        setControlSignals(ControlUnit.getControlSignalFalse());
     }
 
 
