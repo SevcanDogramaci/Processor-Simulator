@@ -1,11 +1,19 @@
-addi $t0, $t0, 5
-addi $t1, $t1, 3
-nor $t2, $t0, $t1
+jal label
 
-addiu $s5, $s0, -25
-addiu $s6, $s0, 25
-slt $s7, $s5, $s6
+slt $r1, $r0, $sp
+slti $r2, $r0, 300
 
-addiu $s5, $s0, -25
-addiu $s6, $s0, 25
-sltu $s7, $s5, $s6
+sw $r1, -4($sp)
+lw $r0, -4($sp)
+sll $r1, $r1, $r1
+srl $r2, $r1, $r1
+lui $r3, 2
+muli $r1, $r1, 5
+mul $r1, $r1, $r2
+bne $r0, $r1, exit
+
+label: sub $sp, $sp, $r0
+jr $ra
+
+exit:
+syscall $sp
