@@ -150,9 +150,9 @@ public class Controller {
         sTable.setItems(data);
         int changed = processor.getChangedMemIdx();
         if(changed != -1){
-            changed = (MemoryFile.STACK_START - changed)/4;
-            sTable.scrollTo(changed - 1);
-            sTable.getSelectionModel().select(changed - 1);
+            changed = (MemoryFile.STACK_START - changed)/2 ;
+            sTable.scrollTo(changed );
+            sTable.getSelectionModel().select(changed );
         }
     }
 
@@ -340,8 +340,6 @@ public class Controller {
         AtomicInteger i = new AtomicInteger();
 
         controlSignals.forEach((csName, csVal) -> {
-            System.out.println(csName + ": " + csVal);
-            System.out.println(ledOn.widthProperty());
             if (csVal)
                 csImgs.get(i.get()).setImage(ledOn);
             else

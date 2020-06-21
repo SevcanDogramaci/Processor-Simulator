@@ -46,11 +46,11 @@ public class ALU {
                 break;
 
             case SLL:
-                out = srcv << rsv;
+                out = rsv << srcv;
                 break;
 
             case SRL:
-                out = srcv >>> rsv;
+                out = rsv >>> srcv;
                 break;
 
             case MUL:

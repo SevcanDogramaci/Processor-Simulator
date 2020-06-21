@@ -99,7 +99,8 @@ public class Processor {
 
         int branch_pc = new_pc + (instruction.getImmediate() << 1); // branch address
 
-        boolean is_branch = ((controlUnit.isBranch() && alu_zero) || // beq
+        System.out.println("alu_zero : "+ alu_zero);
+        boolean is_branch = ((controlUnit.isBranch() && alu_zero && !controlUnit.isRegDst()) || // beq
                             (controlUnit.isBranch() && controlUnit.isRegDst() && !alu_zero)); // bne
 
         // update pc if branching or jumping exists

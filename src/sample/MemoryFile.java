@@ -26,12 +26,19 @@ public class MemoryFile {
     }
 
     // Do read or write operation if required according to flags.
-    public int cycle(boolean read, boolean write, int index, int writeValue){
+    public int cycle(boolean read, boolean write, int index, int writeValue) throws Exception {
         System.out.println("inputs: " + read + " " + write + " " + index + " " + writeValue);
+
         if (read){
+            if (index % 2 != 0)
+                throw new Exception("Only aligned memory access allowed! " +
+                        "\nMemory address " + index + " invalid!");
             return get(index);
         }
         else if (write){
+            if (index % 2 != 0)
+                throw new Exception("Only aligned memory access allowed! " +
+                        "\nMemory address " + index + " invalid!");
             set(index, writeValue);
         }
 
@@ -40,10 +47,13 @@ public class MemoryFile {
 
     // writes value to memory, (aligned)
     private void set(int index, int value){
+        System.out.println("Memory File Set: index = " + (index>>1) );
         byte[] row = data[index>>1];
 
         row[1] = (byte) (value%(STACK_START+1));
         row[0] = (byte) ((value>>8)%(STACK_START+1));
+
+        System.out.println("Memory File Set: value = " + row[0] + " : "  + row[1]);
     }
 
     // reads value from memory, (aligned)
