@@ -8,13 +8,13 @@ import java.util.List;
 
 public class MemoryFile {
 
-    public static final int STACK_START = 255;
+    public static final int STACK_START = 256;
     private Register stackPointer;
     private static byte data[][]; // two dimensional byte array used to reflect two aligned memory.
 
     public MemoryFile(){
         stackPointer = RegisterFile.getRegister("sp");
-        data = new byte[(STACK_START+1) >> 1][2];
+        data = new byte[STACK_START >> 1][2];
     }
 
     public static void resetData(){
@@ -35,6 +35,7 @@ public class MemoryFile {
                         "\nMemory address " + index + " invalid!");
             return get(index);
         }
+
         else if (write){
             if (index % 2 != 0)
                 throw new Exception("Only aligned memory access allowed! " +
@@ -50,8 +51,8 @@ public class MemoryFile {
         System.out.println("Memory File Set: index = " + (index>>1) );
         byte[] row = data[index>>1];
 
-        row[1] = (byte) (value%(STACK_START+1));
-        row[0] = (byte) ((value>>8)%(STACK_START+1));
+        row[1] = (byte) (value%(STACK_START));
+        row[0] = (byte) ((value>>8)%(STACK_START));
 
         System.out.println("Memory File Set: value = " + row[0] + " : "  + row[1]);
     }

@@ -1,29 +1,17 @@
 foo:
-    addi $sp, $sp, -32
-    addi $a0, $a0, -4
-    sw $a0, 16($sp)
-    sw $ra, 12($sp)
-    sw $fp, 8($sp)
-    addiu $fp, $sp, 28
-    addi $a0, $a0, 1
+    sw $a0, -17($sp)
+    sw $ra, -21($sp)
+    sw $sp, -25($sp)
+    syscall $sp
     jal bar
-    lw $fp, 8($sp)
-    lw $ra, 12($sp)
-    lw $a0, 16($sp)
-    addiu $sp, $sp, 32
+    lw $sp, -25($sp)
+    lw $ra, -21($sp)
+    lw $a0, -17($sp)
+    syscall $sp
     j exit
 
 bar: 
-    addi $sp, $sp, -32
-    sw $a0, 16($sp)
-    sw $ra, 12($sp)
-    sw $fp, 8($sp)
-    addiu $fp, $sp, 28
-    addi $v0, $a0, 1
-    lw $fp, 8($sp)
-    lw $ra, 12($sp)
-    lw $a0, 16($sp)
-    addi $sp, $sp, 32
+    muli $a0, $a0, 10
     jr $ra
 
 exit:

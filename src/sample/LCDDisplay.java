@@ -13,7 +13,6 @@ public class LCDDisplay {
             displayString = "op:"+ fillWithZero(opcode, 3) + " j:" + jump + " im:"+ imm;
         }
 
-        System.out.println("display >> " + displayString);
     }
 
     private static String fillWithZero(String s, int expectedLen){

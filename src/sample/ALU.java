@@ -15,8 +15,6 @@ public class ALU {
     private boolean zero;
 
     public void setOperation(short control, int srcv, int rsv) {
-        System.out.println("srcv : " + srcv);
-        System.out.println("rsv : " + rsv);
         zero = false;
         out = 0;
 
@@ -46,11 +44,11 @@ public class ALU {
                 break;
 
             case SLL:
-                out = rsv << srcv;
+                out = srcv << rsv;
                 break;
 
             case SRL:
-                out = rsv >>> srcv;
+                out = srcv >>> rsv;
                 break;
 
             case MUL:

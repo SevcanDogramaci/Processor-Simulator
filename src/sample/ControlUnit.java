@@ -106,7 +106,6 @@ public class ControlUnit {
 
             if (instruction.opcode == 1){ // jal
                 RegWrite = true;
-                System.out.println(true);
             }
         }
     }

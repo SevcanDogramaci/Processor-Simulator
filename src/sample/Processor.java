@@ -99,7 +99,6 @@ public class Processor {
 
         int branch_pc = new_pc + (instruction.getImmediate() << 1); // branch address
 
-        System.out.println("alu_zero : "+ alu_zero);
         boolean is_branch = ((controlUnit.isBranch() && alu_zero && !controlUnit.isRegDst()) || // beq
                             (controlUnit.isBranch() && controlUnit.isRegDst() && !alu_zero)); // bne
 
@@ -107,7 +106,6 @@ public class Processor {
         new_pc = (int)mux(new_pc, branch_pc, is_branch); // branch
         new_pc = (int)mux(new_pc, instruction.getImmediate(), controlUnit.isJump()); // jump
         new_pc = (int)mux(new_pc, jr_pc, controlUnit.isJumpReg()); // jr
-        System.out.println("new pc: " + new_pc);
         pc.set(new_pc);
     }
 

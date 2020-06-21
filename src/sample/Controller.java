@@ -151,8 +151,8 @@ public class Controller {
         int changed = processor.getChangedMemIdx();
         if(changed != -1){
             changed = (MemoryFile.STACK_START - changed)/2 ;
-            sTable.scrollTo(changed );
-            sTable.getSelectionModel().select(changed );
+            sTable.scrollTo(changed-1);
+            sTable.getSelectionModel().select(changed -1);
         }
     }
 

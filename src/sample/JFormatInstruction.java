@@ -42,7 +42,6 @@ public class JFormatInstruction extends Instruction {
 
         // specify instruction fields
         this.immediate = calculateLabel(offset);
-        System.out.println("j imm: " + immediate);
         this.targetReg = RegisterFile.getRegister("ra");
     }
 
