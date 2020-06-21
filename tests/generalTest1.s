@@ -1,12 +1,16 @@
-addi $t1, $t3, 8
+slti $r1, $r3, 8
+muli $r3, $r1, 8
+
 jal label
-ori $t7, $t7, 1
-slti $t7, $t7, 0
+or $r2, $r1, $r3
+muli $r1, $r2, -90
+muli $r3, $r1, -45
+slti $r1, $r1, 0
 j exit
-slti $t7, $t7, 0
+
 label:
-andi $t7, $t7, 0
-andi $t7, $t7, 0
-jalr $s1, $ra
+and $r1, $r1, 0
+jr $ra
 
 exit:
+sw $r3, -2($sp)

@@ -1,9 +1,10 @@
-addi $s1, $s1, 5        
-addi $s2, $s2, 6
-addi $s3, $s3, 0
+slti $r0, $r0, 5
+muli $r1, $r0, 5
+muli $r2, $r0, 6
 
-beq $s3, $s4, true          # if $s3 == $s4 goto true
-sub $s0, $s1, $s2           # else $s0 = $s1 - $s2
+beq $r3, $r3, true          # if $r3 == $r2 goto true
+sub $r0, $r1, $r2           # else $r0 = $r1 - $r2
 j exit
-true: add $s0, $s1, $s2     # $s0 = $s1 + $s2
-exit: 
+true: add $r0, $r1, $r2     # $r0 = $r1 + $r2
+exit:
+syscall $r0
