@@ -376,7 +376,7 @@
                                     <children>
                                         <TableView fx:id="sTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn prefWidth="300.0" text="Data Segment">
+                                                <TableColumn prefWidth="300.0" text="Data Memory">
                                                     <columns>
                                                         <TableColumn fx:id="sAddress" editable="false" maxWidth="1500.0" prefWidth="179.0" sortType="DESCENDING" styleClass="aligned-column" text="Address" />
                                                         <TableColumn id="textSegValue" fx:id="sValue" prefWidth="153.0" text="Value" />
@@ -394,7 +394,7 @@
                                         <TableView fx:id="textSegTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
 
-                                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" prefWidth="284.0" text="Text Segment">
+                                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" prefWidth="284.0" text="Instruction Memory">
                                                     <columns>
                                                         <TableColumn fx:id="textSegAddress" editable="false" maxWidth="1500.0" prefWidth="100.0" sortType="DESCENDING" styleClass="aligned-column" text="Address" />
                                                         <TableColumn fx:id="textSegValue" editable="false" minWidth="-Infinity" prefWidth="232.0" sortable="false" text="Value" />

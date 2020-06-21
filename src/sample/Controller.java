@@ -120,7 +120,7 @@ public class Controller {
     }
 
     private void setUpTablePlaceholders() {
-        sTable.setPlaceholder(new Label("Stack is empty"));
+        sTable.setPlaceholder(new Label("No data in memory"));
         textSegTable.setPlaceholder(new Label("No instruction in memory"));
     }
 
