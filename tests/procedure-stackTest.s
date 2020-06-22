@@ -10,6 +10,6 @@ lw $a0, -16($sp)
 syscall $sp
 j exit
 bar: lui $a0, 16
-muli $a0, $a0, 10
+muli $a0, $a0, 7
 jr $ra
 exit: 
