@@ -52,7 +52,7 @@ public class ALU {
                 break;
 
             case MUL:
-                out = srcv * rsv; // to be changed according to multiplication implementation
+                out = srcv * rsv;
         }
     }
 
